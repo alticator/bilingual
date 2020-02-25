@@ -1,0 +1,11 @@
+/*
+    Copyright (C) 2020 Alticator. All rights reserved.
+*/
+
+* {font-family: sans-serif;}
+html, body {margin: 0;}
+nav {background-color: #00D0FF; color: white; padding: 5px; font-size: 36px;}
+.title {padding-top: 200px; padding-bottom: 200px; text-align: center; font-size: 48px;}
+button {width: 200px; height: 100px; background-color: #00D0FF; color: white; font-size: 36px; border: none; margin: 10px; box-shadow: 0px 0px 50px lightgray; transition: 0.5s;}
+button:hover, button:focus {font-size: 48px; width: 250px; height: 125px;}
+.data {display: none;}
