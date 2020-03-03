@@ -18,5 +18,10 @@ var database = {
         english: ["the father", "the mother", "the brother", "the sister", "the aunt", "the uncle", "the cousin (masculine)", "the cousin (feminine)"],
         englishSecondary: ["the dad", "the mom", "the brother", "the sister", "the aunt", "the uncle", "the cousin", "the cousin"],
         french: ["le père", "la mère", "le frère", "la sœur", "la tante", "l'oncle", "le cousin", "la cousine"]
+    },
+    numbers: {
+        english: ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"],
+        englishSecondary: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+        french: ["un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze"]
     }
 };

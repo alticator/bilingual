@@ -18,7 +18,7 @@ var timer = new rect(10, 40, 20, 20, blueGradient);
 var timerText = new textObj("Timer", 15, 60, "20vh Arial", "#00D0FF", "left");
 var wordId = random(0, database.pronouns.english.length);
 var wordContainer = new rect(40, -10, 20, 5, "#00D0FF");
-var word = new textObj("Error", 50, -10, "3vh Arial", "white", "center");
+var word = new textObj("Database Error", 50, -10, "3vh Arial", "white", "center");
 updateWord();
 document.addEventListener("keydown", keyPress);
 var score = 0;
@@ -87,121 +87,33 @@ function incorrectThree() {
 }
 
 function checkAnswer() {
-    if (gameType == "pronouns") {
-        if (questionType == 1) {
-            if (getInput() == database.pronouns.french[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
+    if (questionType == 1) {
+        if (getInput() == eval("database." + gameType + ".french[wordId]")) {
+            correct();
         }
-        if (questionType == 2) {
-            if (getInput() == database.pronouns.englishSecondary[wordId] || getInput() == database.pronouns.english[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
+        else {
+            incorrect();
         }
     }
-    else if (gameType == "living") {
-        if (questionType == 1) {
-            if (getInput() == database.living.french[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
+    if (questionType == 2) {
+        if (getInput() == eval("database." + gameType + ".englishSecondary[wordId]") || getInput() == eval("database." + gameType + ".english[wordId]")) {
+            correct();
         }
-        if (questionType == 2) {
-            if (getInput() == database.living.englishSecondary[wordId] || getInput() == database.living.english[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
-        }
-    }
-    else if (gameType == "verbs") {
-        if (questionType == 1) {
-            if (getInput() == database.verbs.french[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
-        }
-        if (questionType == 2) {
-            if (getInput() == database.verbs.englishSecondary[wordId] || getInput() == database.verbs.english[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
-        }
-    }
-    else if (gameType == "family") {
-        if (questionType == 1) {
-            if (getInput() == database.family.french[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
-        }
-        if (questionType == 2) {
-            if (getInput() == database.family.englishSecondary[wordId] || getInput() == database.family.english[wordId]) {
-                correct();
-            }
-            else {
-                incorrect();
-            }
+        else {
+            incorrect();
         }
     }
 }
 
 function updateWord() {
     questionType = random(1, 3)
-    if (gameType == "pronouns") {
-        if (questionType == 1) {
-            wordId = random(0, database.pronouns.english.length);
-            word.string = database.pronouns.english[wordId];
-        }
-        else if (questionType == 2) {
-            wordId = random(0, database.pronouns.french.length);
-            word.string = database.pronouns.french[wordId];
-        }
+    if (questionType == 1) {
+        wordId = random(0, eval("database." + gameType + ".english.length"));
+        word.string = eval("database." + gameType + ".english[wordId]");
     }
-    else if (gameType == "living") {
-        if (questionType == 1) {
-            wordId = random(0, database.living.english.length);
-            word.string = database.living.english[wordId];
-        }
-        else if (questionType == 2) {
-            wordId = random(0, database.living.french.length);
-            word.string = database.living.french[wordId];
-        }
-    }
-    else if (gameType == "verbs") {
-        if (questionType == 1) {
-            wordId = random(0, database.verbs.english.length);
-            word.string = database.verbs.english[wordId];
-        }
-        else if (questionType == 2) {
-            wordId = random(0, database.verbs.french.length);
-            word.string = database.verbs.french[wordId];
-        }
-    }
-    else if (gameType == "family") {
-        if (questionType == 1) {
-            wordId = random(0, database.family.english.length);
-            word.string = database.family.english[wordId];
-        }
-        else if (questionType == 2) {
-            wordId = random(0, database.family.french.length);
-            word.string = database.family.french[wordId];
-        }
+    else if (questionType == 2) {
+        wordId = random(0, eval("database." + gameType + ".french.length"));
+        word.string = eval("database." + gameType + ".french[wordId]");
     }
 }
 
@@ -227,7 +139,7 @@ function game() {
         gameOver();
     }
     if (timePaused == false) {
-        timer.width += 0.02;
+        timer.width += 0.03;
     }
     updateAll();
 }
