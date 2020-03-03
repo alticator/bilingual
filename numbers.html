@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Alticator Bilingual
+        </title>
+        <link rel="stylesheet" href="game.css">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="game-type" class="data">numbers</div>
+        <nav>
+            <a href="index.html" style="text-decoration: none;">
+            Main Menu
+            </a>
+            <div id="scoreboard-label">
+                score
+            </div>
+            <div id="scoreBoard">
+                0
+            </div>
+        </nav>
+        <canvas id="viewport"></canvas>
+        <div id="container">
+            <input id="input" autofocus>
+            <div>
+                <button onclick="add('à')">à</button>
+                <button onclick="add('â')">â</button>
+                <button onclick="add('æ')">æ</button>
+                <button onclick="add('ç')">ç</button>
+                <button onclick="add('é')">é</button>
+                <button onclick="add('è')">è</button>
+                <button onclick="add('ê')">ê</button>
+                <button onclick="add('ë')">ë</button>
+                <button onclick="add('î')">î</button>
+                <button onclick="add('ï')">ï</button>
+                <button onclick="add('ô')">ô</button>
+                <button onclick="add('œ')">œ</button>
+                <button onclick="add('ù')">ù</button>
+                <button onclick="add('û')">û</button>
+                <button onclick="add('ü')">ü</button>
+                <button onclick="add('ÿ')">ÿ</button>
+            </div>
+        </div>
+        <script src="https://library.alticator.com/alticator-canvas-engine.js"></script>
+        <script src="database.js" charset="utf-8"></script>
+        <script src="scripts.js" charset="utf-8"></script>
+    </body>
+</html>
