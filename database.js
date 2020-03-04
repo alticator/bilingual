@@ -23,5 +23,10 @@ var database = {
         english: ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"],
         englishSecondary: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
         french: ["un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze"]
+    },
+    animals: {
+        english: ["the dog", "the cat", "the horse", "the donkey", "the duck", "the elephant", "the giraffe", "the lion", "the money", "the pig", "the mouse", "the rat", "the tiger", "the squirrel", "the shark", "the panther", "the cow", "the fox"],
+        englishSecondary: ["the dog", "the cat", "the horse", "the donkey", "the duck", "the elephant", "the giraffe", "the lion", "the monkey", "the pig", "the mouse", "the rat", "the tiger", "the squirrel", "the shark", "the panther", "the cow", "the fox"],
+        french: ["le chien", "le chat", "le cheval", "l'âne", "le canard", "l'éléphant", "la girafe", "le lion", "le singe", "le cochon", "la souris", "le rat", "le tigre", "l'écureuil", "le requin", "la panthère", "la vache", "le renard"]
     }
 };
