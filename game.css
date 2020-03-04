@@ -13,5 +13,5 @@ nav a:hover {color: gray;}
 button {background-color: #00D0FF; color: white; font-size: 24px; border: none; box-shadow: 0px 0px 50px lightgray;}
 .data {display: none;}
 input {width: 20vw; font-size: 24px; border: 2px solid #00D0FF; text-align: center; outline: none; padding: 5px; font-size: 24px;}
-#scoreboard-label {margin-top: 20vh; font-size: 24px; text-transform: capitalize; font-variant: small-caps; font-weight: bold;}
-#scoreBoard {font-size: 54px; padding: 3px;}
+#scoreboard-label, #livesleft-label {margin-top: 20vh; font-size: 24px; text-transform: capitalize; font-variant: small-caps; font-weight: bold;}
+#scoreBoard, #livesLeft {font-size: 54px; padding: 3px;}

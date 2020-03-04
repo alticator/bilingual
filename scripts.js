@@ -24,7 +24,14 @@ document.addEventListener("keydown", keyPress);
 var score = 0;
 speed = 0.1;
 word.Yv = speed;
-timePaused = false;
+var timePaused = false;
+var livesLeft = 5;
+var animationFontSize = 3;
+var fontSizePlus = 0;
+var livesLeftBoard = new rect(-100, 10, 60, 60, "#00D0FF");
+var incorrectLabel = new textObj("Lives Left:", -100, 15, "3vh Arial", "white", "center");
+var incorrectDigitOne = new textObj("5", -100, 50, "20vh Arial", "white", "center");
+var incorrectDigitTwo = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 
 function add(character) {
     document.getElementById("input").value += character;
@@ -41,40 +48,60 @@ function correct() {
     document.getElementById("input").value = "";
     timePaused = true;
     word.Yv = 0;
-    word.Xv = 5;
-    wordContainer.Xv = 5;
-    setTimeout(correctTwo, 1000);
+    fontSizePlus = 0.5;
+    setTimeout(correctTwo, 100);
 }
 
 function correctTwo() {
+    fontSizePlus = -0.5;
+    setTimeout(correctThree, 100);
+}
+
+function correctThree() {
     word.Yv = speed;
     word.Xv = 0;
     wordContainer.Xv = 0;
     word.x = 50;
     word.y = 0;
     wordContainer.x = 40;
+    fontSizePlus = 0;
+    animationFontSize = 3;
     timer.width -= 5;
     updateWord();
     timePaused = false;
 }
 
 function incorrect() {
-    score++;
+    livesLeft--;
     document.getElementById("input").value = "";
     timePaused = true;
-    word.string = "Incorrect";
-    word.color = "red";
+    livesLeftBoard.x = 20;
+    incorrectLabel.x = 50;
+    incorrectLabel.x = 50;
+    incorrectDigitOne.string = livesLeft + 1;
+    incorrectDigitOne.x = 50;
     word.Yv = 0;
-    setTimeout(incorrectTwo, 1000);
+    setTimeout(incorrectTwo, 500);
 }
 
 function incorrectTwo() {
-    word.Xv = -5;
-    wordContainer.Xv = -5;
-    setTimeout(incorrectThree, 1000);
+    incorrectDigitOne.Yv = 8;
+    setTimeout(incorrectThree, 800);
 }
 
 function incorrectThree() {
+    incorrectDigitOne.Yv = 0;
+    incorrectDigitOne.x = -100;
+    incorrectDigitOne.y = 50;
+    incorrectDigitTwo.string = livesLeft;
+    incorrectDigitTwo.x = 50;
+    setTimeout(incorrectFour, 500);
+}
+
+function incorrectFour() {
+    livesLeftBoard.x = -100;
+    incorrectLabel.x = -100;
+    incorrectDigitTwo.x = -100;
     word.color = "white";
     word.Yv = speed;
     word.Xv = 0;
@@ -88,7 +115,7 @@ function incorrectThree() {
 
 function checkAnswer() {
     if (questionType == 1) {
-        if (getInput() == eval("database." + gameType + ".french[wordId]")) {
+        if (getInput() == eval("database." + gameType + ".french[wordId].toLowerCase()")) {
             correct();
         }
         else {
@@ -96,7 +123,7 @@ function checkAnswer() {
         }
     }
     if (questionType == 2) {
-        if (getInput() == eval("database." + gameType + ".englishSecondary[wordId]") || getInput() == eval("database." + gameType + ".english[wordId]")) {
+        if (getInput() == eval("database." + gameType + ".englishSecondary[wordId].toLowerCase()") || getInput() == eval("database." + gameType + ".english[wordId].toLowerCase()")) {
             correct();
         }
         else {
@@ -120,13 +147,15 @@ function updateWord() {
 function gameOver() {
     clearInterval(gameLoop);
     clearObjects();
-    new textObj("Game Over", 50, 50, "36px Arial", "#00D0FF", "center");
+    new rect(20, 20, 60, 60, "#00D0FF");
+    new textObj("Game Over", 50, 50, "36px Arial", "white", "center");
     var panel = document.getElementById("container");
     panel.parentNode.removeChild(panel);
 }
 
 function game() {
     document.getElementById("scoreBoard").innerHTML = score;
+    document.getElementById("livesLeft").innerHTML = livesLeft;
     wordContainer.x = word.x - 10;
     wordContainer.y = word.y - 3.5;
     document.getElementById("input").focus();
@@ -134,12 +163,16 @@ function game() {
         document.getElementById("input").value = "";
         updateWord();
         word.y = 0;
+        livesLeft--;
+        incorrect();
     }
-    if (objectCollision(timer, goal)) {
+    if (objectCollision(timer, goal) || livesLeft < 1) {
         gameOver();
     }
     if (timePaused == false) {
         timer.width += 0.03;
     }
+    animationFontSize += fontSizePlus;
+    word.font = animationFontSize + "vh Arial";
     updateAll();
 }
