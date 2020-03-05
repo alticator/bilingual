@@ -29,7 +29,8 @@ var livesLeft = 5;
 var animationFontSize = 3;
 var fontSizePlus = 0;
 var livesLeftBoard = new rect(-100, 10, 60, 60, "#00D0FF");
-var incorrectLabel = new textObj("Lives Left:", -100, 15, "3vh Arial", "white", "center");
+var incorrectLabel = new textObj("Lives Left:", -100, 20, "3vh Arial", "white", "center");
+var correctAnswerLabel = new textObj("Database Error", -100, 15, "3vh Arial", "white", "center");
 var incorrectDigitOne = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var incorrectDigitTwo = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 
@@ -77,7 +78,13 @@ function incorrect() {
     timePaused = true;
     livesLeftBoard.x = 20;
     incorrectLabel.x = 50;
-    incorrectLabel.x = 50;
+    if (questionType == 1) {
+        correctAnswerLabel.string = "Correct Answer: " + eval("database." + gameType + ".french[wordId]");
+    }
+    else if (questionType == 2) {
+        correctAnswerLabel.string = "Correct Answer: " + eval("database." + gameType + ".english[wordId]");
+    }
+    correctAnswerLabel.x = 50;
     incorrectDigitOne.string = livesLeft + 1;
     incorrectDigitOne.x = 50;
     word.Yv = 0;
@@ -101,6 +108,7 @@ function incorrectThree() {
 function incorrectFour() {
     livesLeftBoard.x = -100;
     incorrectLabel.x = -100;
+    correctAnswerLabel.x = -100;
     incorrectDigitTwo.x = -100;
     word.color = "white";
     word.Yv = speed;
