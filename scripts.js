@@ -14,7 +14,7 @@ var gameType = getData("game-type");
 var gameLoop = setInterval(game, 20);
 var questionType = 1;
 var goal = new rect(90, 40, 10, 20, "red");
-var timer = new rect(10, 40, 20, 20, blueGradient);
+var timer = new rect(10, 40, 0, 20, blueGradient);
 var timerText = new textObj("Timer", 15, 60, "20vh Arial", "#00D0FF", "left");
 var wordId = random(0, database.pronouns.english.length);
 var wordContainer = new rect(40, -10, 20, 5, "#00D0FF");
@@ -22,7 +22,7 @@ var word = new textObj("Database Error", 50, -10, "3vh Arial", "white", "center"
 updateWord();
 document.addEventListener("keydown", keyPress);
 var score = 0;
-speed = 0.1;
+speed = 0.075;
 word.Yv = speed;
 var timePaused = false;
 var livesLeft = 5;
@@ -33,6 +33,12 @@ var incorrectLabel = new textObj("Lives Left:", -100, 20, "3vh Arial", "white", 
 var correctAnswerLabel = new textObj("Database Error", -100, 15, "3vh Arial", "white", "center");
 var incorrectDigitOne = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var incorrectDigitTwo = new textObj("5", -100, 50, "20vh Arial", "white", "center");
+var wordNumber = 0;
+var stage = 0;
+var stageTextContainer = new rect(-100, 10, 60, 60, "#00D0FF");
+var stageText = new textObj("Error", -100, 40, "5vh Arial", "white", "center");
+var containerTitle = new textObj("Message", -100, 15, "3vh Arial", "white", "center")
+nextStage();
 
 function add(character) {
     document.getElementById("input").value += character;
@@ -42,6 +48,26 @@ function keyPress(event) {
     if (event.key == "Enter") {
         checkAnswer();
     }
+}
+
+function nextStage() {
+    timePaused = true;
+    word.Yv = 0;
+    wordNumber = 0;
+    stage++;
+    stageTextContainer.x = 20;
+    containerTitle.x = 50;
+    stageText.string = "Stage " + stage;
+    stageText.x = 50;
+    speed += 0.025;
+    setTimeout(function() {
+        stageTextContainer.x = -100;
+        containerTitle.x = -100;
+        stageText.x = -100;
+        updateWord();
+        timePaused = false;
+        word.Yv = speed;
+    }, 1000);
 }
 
 function correct() {
@@ -68,7 +94,12 @@ function correctThree() {
     fontSizePlus = 0;
     animationFontSize = 3;
     timer.width -= 5;
-    updateWord();
+    if (wordNumber < 6) {
+        updateWord();
+    }
+    else {
+        nextStage();
+    }
     timePaused = false;
 }
 
@@ -150,13 +181,15 @@ function updateWord() {
         wordId = random(0, eval("database." + gameType + ".french.length"));
         word.string = eval("database." + gameType + ".french[wordId]");
     }
+    wordNumber++;
 }
 
 function gameOver() {
     clearInterval(gameLoop);
     clearObjects();
-    new rect(20, 20, 60, 60, "#00D0FF");
-    new textObj("Game Over", 50, 50, "36px Arial", "white", "center");
+    new rect(20, 20, 60, 60, "rgba(255, 255, 255, 0.6)");
+    new textObj("Message", 50, 25, "3vh Arial", "white", "center");
+    new textObj("Game Over", 50, 50, "5vh Arial", "white", "center");
     var panel = document.getElementById("container");
     panel.parentNode.removeChild(panel);
 }
@@ -164,6 +197,7 @@ function gameOver() {
 function game() {
     document.getElementById("scoreBoard").innerHTML = score;
     document.getElementById("livesLeft").innerHTML = livesLeft;
+    document.getElementById("stage").innerHTML = stage;
     wordContainer.x = word.x - 10;
     wordContainer.y = word.y - 3.5;
     document.getElementById("input").focus();
