@@ -4,14 +4,14 @@
 
 * {font-family: sans-serif;}
 html, body {margin: 0;}
-body {background: linear-gradient(black, magenta); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;}
+body {background: linear-gradient(darkblue, magenta); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;}
 #container {position: absolute; left: 30vw; top: 70vh; width: 40vw; margin: auto; text-align: center;}
-#container div {padding: 5px; background-color: white; margin-top: 10px; border: 2px solid #00D0FF;}
-nav {background-color: #00D0FF; color: white; padding: 10px; font-size: 36px; position: fixed; left: 0; top: 0; bottom: 0; width: 10vw;}
+#container div {background-color: rgba(255, 255, 255, 0.6); padding: 5px; margin-top: 10px;}
+nav {background-color: rgba(255, 255, 255, 0.6); color: white; padding: 10px; font-size: 36px; position: fixed; left: 0; top: 0; bottom: 0; width: 10vw; box-sizing: border-box;}
 nav a {color: white; transition: 0.5s;}
 nav a:hover {color: gray;}
 button {background-color: #00D0FF; color: white; font-size: 24px; border: none; box-shadow: 0px 0px 50px lightgray;}
 .data {display: none;}
-input {width: 20vw; font-size: 24px; border: 2px solid #00D0FF; text-align: center; outline: none; padding: 5px; font-size: 24px;}
-#scoreboard-label, #livesleft-label {margin-top: 20vh; font-size: 24px; text-transform: capitalize; font-variant: small-caps; font-weight: bold;}
-#scoreBoard, #livesLeft {font-size: 54px; padding: 3px;}
+input {background-color: rgba(255, 255, 255, 0.6); border: none; width: 20vw; font-size: 24px; text-align: center; outline: none; padding: 8px; font-size: 24px;}
+#label {margin-top: 10vh; font-size: 24px; text-transform: capitalize; font-variant: small-caps; font-weight: bold;}
+#scoreBoard, #livesLeft, #stage {font-size: 54px; padding: 3px;}

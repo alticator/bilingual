@@ -28,5 +28,10 @@ var database = {
         english: ["the dog", "the cat", "the horse", "the donkey", "the duck", "the elephant", "the giraffe", "the lion", "the money", "the pig", "the mouse", "the rat", "the tiger", "the squirrel", "the shark", "the panther", "the cow", "the fox"],
         englishSecondary: ["the dog", "the cat", "the horse", "the donkey", "the duck", "the elephant", "the giraffe", "the lion", "the monkey", "the pig", "the mouse", "the rat", "the tiger", "the squirrel", "the shark", "the panther", "the cow", "the fox"],
         french: ["le chien", "le chat", "le cheval", "l'âne", "le canard", "l'éléphant", "la girafe", "le lion", "le singe", "le cochon", "la souris", "le rat", "le tigre", "l'écureuil", "le requin", "la panthère", "la vache", "le renard"]
+    },
+    numbersTwo: {
+        english: ["thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"],
+        englishSecondary: ["13", "14", "15", "16", "17", "18", "19", "20"],
+        french: ["treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf", "vingt"]
     }
 };
