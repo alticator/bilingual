@@ -28,14 +28,14 @@ var timePaused = false;
 var livesLeft = 5;
 var animationFontSize = 3;
 var fontSizePlus = 0;
-var livesLeftBoard = new rect(-100, 10, 60, 60, "#00D0FF");
+var livesLeftBoard = new rect(-100, 10, 60, 60, "rgba(255, 255, 255, 0.6)");
 var incorrectLabel = new textObj("Lives Left:", -100, 20, "3vh Arial", "white", "center");
 var correctAnswerLabel = new textObj("Database Error", -100, 15, "3vh Arial", "white", "center");
 var incorrectDigitOne = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var incorrectDigitTwo = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var wordNumber = 0;
 var stage = 0;
-var stageTextContainer = new rect(-100, 10, 60, 60, "#00D0FF");
+var stageTextContainer = new rect(-100, 10, 60, 60, "rgba(255, 255, 255, 0.6)");
 var stageText = new textObj("Error", -100, 40, "5vh Arial", "white", "center");
 var containerTitle = new textObj("Message", -100, 15, "3vh Arial", "white", "center")
 nextStage();
