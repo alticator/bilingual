@@ -13,7 +13,6 @@ blueGradient.addColorStop(1, "aqua");
 var gameType = getData("game-type");
 var gameLoop = setInterval(game, 20);
 var questionType = 1;
-var goal = new rect(90, 40, 10, 20, "red");
 var timer = new rect(10, 40, 0, 20, blueGradient);
 var timerText = new textObj("Timer", 15, 60, "20vh Arial", "#00D0FF", "left");
 var wordId = random(0, database.pronouns.english.length);
@@ -28,14 +27,14 @@ var timePaused = false;
 var livesLeft = 5;
 var animationFontSize = 3;
 var fontSizePlus = 0;
-var livesLeftBoard = new rect(-100, 10, 60, 60, "rgba(255, 255, 255, 0.6)");
+var livesLeftBoard = new rect(-100, 10, 60, 60, "rgba(0, 208, 255, 0.7)");
 var incorrectLabel = new textObj("Lives Left:", -100, 20, "3vh Arial", "white", "center");
 var correctAnswerLabel = new textObj("Database Error", -100, 15, "3vh Arial", "white", "center");
 var incorrectDigitOne = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var incorrectDigitTwo = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var wordNumber = 0;
 var stage = 0;
-var stageTextContainer = new rect(-100, 10, 60, 60, "rgba(255, 255, 255, 0.6)");
+var stageTextContainer = new rect(-100, 10, 60, 60, "rgba(0, 208, 255, 0.7)");
 var stageText = new textObj("Error", -100, 40, "5vh Arial", "white", "center");
 var containerTitle = new textObj("Message", -100, 15, "3vh Arial", "white", "center")
 nextStage();
@@ -187,7 +186,7 @@ function updateWord() {
 function gameOver() {
     clearInterval(gameLoop);
     clearObjects();
-    new rect(20, 20, 60, 60, "rgba(255, 255, 255, 0.6)");
+    new rect(20, 20, 60, 60, "rgba(0, 208, 255, 0.8)");
     new textObj("Message", 50, 25, "3vh Arial", "white", "center");
     new textObj("Game Over", 50, 50, "5vh Arial", "white", "center");
     var panel = document.getElementById("container");
@@ -205,10 +204,9 @@ function game() {
         document.getElementById("input").value = "";
         updateWord();
         word.y = 0;
-        livesLeft--;
         incorrect();
     }
-    if (objectCollision(timer, goal) || livesLeft < 1) {
+    if (timer.x + timer.width > 100 || livesLeft < 1) {
         gameOver();
     }
     if (timePaused == false) {
