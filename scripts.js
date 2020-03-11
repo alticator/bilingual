@@ -16,8 +16,8 @@ var questionType = 1;
 var timer = new rect(10, 40, 0, 20, blueGradient);
 var timerText = new textObj("Timer", 15, 60, "20vh Arial", "#00D0FF", "left");
 var wordId = random(0, database.pronouns.english.length);
-var wordContainer = new rect(40, -10, 20, 5, "#00D0FF");
-var word = new textObj("Database Error", 50, -10, "3vh Arial", "white", "center");
+var wordContainer = new rect(40, -10, 20, 5, "rgba(255, 255, 255, 0.8)");
+var word = new textObj("Database Error", 50, -10, "3vh Arial", magentaGradientTwo, "center");
 updateWord();
 document.addEventListener("keydown", keyPress);
 var score = 0;
@@ -140,7 +140,6 @@ function incorrectFour() {
     incorrectLabel.x = -100;
     correctAnswerLabel.x = -100;
     incorrectDigitTwo.x = -100;
-    word.color = "white";
     word.Yv = speed;
     word.Xv = 0;
     wordContainer.Xv = 0;
