@@ -33,5 +33,10 @@ var database = {
         english: ["thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"],
         englishSecondary: ["13", "14", "15", "16", "17", "18", "19", "20"],
         french: ["treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf", "vingt"]
+    },
+    sentences: {
+        english: ["We run.", "We will run tomorrow.", "He went there.", "We are going to Paris.", "I like my car.", "You have a big house.", "There are restaurants in Paris."],
+        englishSecondary: ["We are running.", "We'll run tomorrow.", "He went there.", "We're going to Paris.", "I like my car.", "You have a big house.", "There are restaurants in Paris."],
+        french: ["Nous courrons.", "Nous courrons demain.", "Il est allé là.", "Nous allons à Paris.", "J'aime ma voiture.", "Tu as une grande maison.", "Il y a des restaurants à Paris."]
     }
 };

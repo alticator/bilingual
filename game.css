@@ -4,7 +4,7 @@
 
 * {font-family: sans-serif;}
 html, body {margin: 0;}
-body {background: linear-gradient(darkblue, magenta); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;}
+body {background: linear-gradient(to bottom right, #23a6d5, #23d5ab, blue, magenta, purple); background-size: 400% 400%; animation-name: background-scroll; animation-duration: 30s; animation-iteration-count: infinite;}
 #container {position: absolute; left: 30vw; top: 70vh; width: 40vw; margin: auto; text-align: center;}
 #container div {background-color: rgba(255, 255, 255, 0.6); padding: 5px; margin-top: 10px;}
 nav {background-color: rgba(255, 255, 255, 0.6); color: white; padding: 10px; font-size: 36px; position: fixed; left: 0; top: 0; bottom: 0; width: 10vw; box-sizing: border-box;}
@@ -12,6 +12,16 @@ nav a {color: white; transition: 0.5s;}
 nav a:hover {color: gray;}
 button {background-color: #00D0FF; color: white; font-size: 24px; border: none; box-shadow: 0px 0px 50px lightgray;}
 .data {display: none;}
-input {background-color: rgba(255, 255, 255, 0.6); border: none; width: 20vw; font-size: 24px; text-align: center; outline: none; padding: 8px; font-size: 24px;}
-#label {margin-top: 10vh; font-size: 24px; text-transform: capitalize; font-variant: small-caps; font-weight: bold;}
+input {background-color: rgba(255, 255, 255, 0.6); border: none; width: 20vw; font-size: 24px; text-align: center; outline: none; padding: 8px; font-size: 24px; color: #007f9c;}
+#navContainer {margin-top: 10vh; padding: 10px;}
+.labelContainer {margin-top: 1vh; padding: 3px; border-radius: 10px;}
+.labelContainer:nth-child(even) {background: linear-gradient(to right, orange, darkorange); transform: perspective(100px) rotateY(5deg);}
+.labelContainer:nth-child(odd) {background: linear-gradient(to right, darkorange, orange); transform: perspective(100px) rotateY(-5deg);}
+.label {font-size: 24px; text-transform: capitalize; font-variant: small-caps; font-weight: bold;}
 #scoreBoard, #livesLeft, #stage {font-size: 54px; padding: 3px;}
+
+@keyframes background-scroll {
+    0% {background-position: 0% 0%;}
+    50% {background-position: 50% 90%;}
+    100% {background-position: 0% 0%;}
+}
