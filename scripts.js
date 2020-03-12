@@ -182,12 +182,12 @@ function updateWord() {
     wordNumber++;
 }
 
-function gameOver() {
+function gameOver(message) {
     clearInterval(gameLoop);
     clearObjects();
     new rect(20, 20, 60, 60, "rgba(0, 208, 255, 0.8)");
-    new textObj("Message", 50, 25, "3vh Arial", "white", "center");
-    new textObj("Game Over", 50, 50, "5vh Arial", "white", "center");
+    new textObj("Game Over", 50, 25, "3vh Arial", "white", "center");
+    new textObj(message, 50, 50, "5vh Arial", "white", "center");
     var panel = document.getElementById("container");
     panel.parentNode.removeChild(panel);
 }
@@ -205,8 +205,11 @@ function game() {
         word.y = 0;
         incorrect();
     }
-    if (timer.x + timer.width > 100 || livesLeft < 1) {
-        gameOver();
+    if (timer.x + timer.width > 100) {
+        gameOver("Time's Up");
+    }
+    if (livesLeft < 1) {
+        gameOver("Out of Lives");
     }
     if (timePaused == false) {
         timer.width += 0.03;
