@@ -92,7 +92,12 @@ function correctThree() {
     wordContainer.x = 40;
     fontSizePlus = 0;
     animationFontSize = 3;
-    timer.width -= 5;
+    if (timer.width > 5) {
+        timer.width -= 5;
+    }
+    else {
+        timer.width = 0;
+    }
     if (wordNumber < 6) {
         updateWord();
     }
