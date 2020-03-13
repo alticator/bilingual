@@ -6,6 +6,10 @@ function getInput() {
     return document.getElementById("input").value.toLowerCase();
 }
 
+function getId(id) {
+    return document.getElementById(id);
+}
+
 var blueGradient = ctx.createLinearGradient(0, 0, window.innerWidth, 0);
 blueGradient.addColorStop(0, "blue");
 blueGradient.addColorStop(1, "aqua");
@@ -16,7 +20,7 @@ var questionType = 1;
 var timer = new rect(10, 40, 0, 20, blueGradient);
 var timerText = new textObj("Timer", 15, 60, "20vh Arial", "#00D0FF", "left");
 var wordId = random(0, database.pronouns.english.length);
-var wordContainer = new rect(40, -10, 20, 5, "rgba(255, 255, 255, 0.8)");
+var wordContainer = new imageObj(60, -10, 30, 5, "wordContainer.png");
 var word = new textObj("Database Error", 50, -10, "3vh Arial", magentaGradientTwo, "center");
 updateWord();
 document.addEventListener("keydown", keyPress);
@@ -36,6 +40,7 @@ var wordNumber = 0;
 var stage = 0;
 var stageTextContainer = new rect(-100, 10, 60, 60, "rgba(0, 208, 255, 0.7)");
 var stageText = new textObj("Error", -100, 40, "5vh Arial", "white", "center");
+var pauseText = new textObj("Paused", -100, 40, "5vh Arial", "white", "center");
 var containerTitle = new textObj("Message", -100, 15, "3vh Arial", "white", "center")
 nextStage();
 
@@ -47,6 +52,28 @@ function keyPress(event) {
     if (event.key == "Enter") {
         checkAnswer();
     }
+}
+
+function pause() {
+    timePaused = true;
+    word.Yv = 0;
+    stageTextContainer.x = 20;
+    pauseText.x = 50;
+    word.x = -100;
+    getId("container").style.visibility = "hidden";
+    getId("pauseButton").innerHTML = "Resume";
+    getId("pauseButton").onclick = resume;
+}
+
+function resume() {
+    timePaused = false;
+    word.Yv = speed;
+    stageTextContainer.x = -100;
+    pauseText.x = -100;
+    word.x = 50;
+    getId("container").style.visibility = "visible";
+    getId("pauseButton").innerHTML = "Pause";
+    getId("pauseButton").onclick = pause;
 }
 
 function nextStage() {
@@ -70,7 +97,7 @@ function nextStage() {
 }
 
 function correct() {
-    score++;
+    score += Math.floor(100 - word.y);
     document.getElementById("input").value = "";
     timePaused = true;
     word.Yv = 0;
@@ -92,7 +119,12 @@ function correctThree() {
     wordContainer.x = 40;
     fontSizePlus = 0;
     animationFontSize = 3;
-    timer.width -= 5;
+    if (timer.width > 5) {
+        timer.width -= 5;
+    }
+    else {
+        timer.width = 0;
+    }
     if (wordNumber < 6) {
         updateWord();
     }
@@ -182,12 +214,20 @@ function updateWord() {
     wordNumber++;
 }
 
-function gameOver() {
+function gameOver(message) {
     clearInterval(gameLoop);
     clearObjects();
     new rect(20, 20, 60, 60, "rgba(0, 208, 255, 0.8)");
-    new textObj("Message", 50, 25, "3vh Arial", "white", "center");
-    new textObj("Game Over", 50, 50, "5vh Arial", "white", "center");
+    new textObj("Game Over", 50, 25, "3vh Arial", "white", "center");
+    new textObj(message, 50, 50, "5vh Arial", "white", "center");
+    var correctAnswer;
+    if (questionType == 1) {
+        correctAnswer = eval("database." + gameType + ".french[wordId]");
+    }
+    else if (questionType == 2) {
+        correctAnswer = eval("database." + gameType + ".english[wordId]");
+    }
+    new textObj("Correct Answer: " + correctAnswer, 50, 30, "3vh Arial", "white", "center");
     var panel = document.getElementById("container");
     panel.parentNode.removeChild(panel);
 }
@@ -196,8 +236,8 @@ function game() {
     document.getElementById("scoreBoard").innerHTML = score;
     document.getElementById("livesLeft").innerHTML = livesLeft;
     document.getElementById("stage").innerHTML = stage;
-    wordContainer.x = word.x - 10;
-    wordContainer.y = word.y - 3.5;
+    wordContainer.x = word.x - 15;
+    wordContainer.y = word.y - 3.5;
     document.getElementById("input").focus();
     if (word.y > 100) {
         document.getElementById("input").value = "";
@@ -205,8 +245,11 @@ function game() {
         word.y = 0;
         incorrect();
     }
-    if (timer.x + timer.width > 100 || livesLeft < 1) {
-        gameOver();
+    if (timer.x + timer.width > 100) {
+        gameOver("Time's Up");
+    }
+    if (livesLeft < 1) {
+        gameOver("Out of Lives");
     }
     if (timePaused == false) {
         timer.width += 0.03;

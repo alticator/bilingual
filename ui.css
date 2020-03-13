@@ -4,9 +4,9 @@
 
 * {font-family: sans-serif;}
 html, body {margin: 0;}
-body {text-align: center; background: linear-gradient(to bottom right, lightblue, #00d0ff);}
-#container {background-color: rgba(255, 255, 255, 0.6); min-height: 100vh; animation-name: slide-in; animation-duration: 0.5s; position: relative;}
-nav {background-color: #00D0FF; color: white; padding: 5px; font-size: 36px;}
+body {text-align: center; background: linear-gradient(to bottom right, lightblue, #00d0ff); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;}
+#container {background-color: rgba(255, 255, 255, 0.6); min-height: 100vh; animation-name: slide-in; animation-duration: 0.5s; position: relative; box-shadow: 0px 0px 30px teal;}
+nav {background-color: #00d0ff; color: white; padding: 5px; font-size: 36px; box-shadow: 0px 0px 30px teal;}
 .title {padding-top: 200px; padding-bottom: 200px; text-align: center; font-size: 48px; color: white;}
 button {width: 200px; height: 100px; background-color: #00D0FF; color: white; font-size: 36px; border: none; margin: 10px; transition: 0.5s; margin-top: 40px;}
 button:hover, button:focus {font-size: 48px; width: 250px; height: 125px;margin-top: 15px; box-shadow: 0px 0px 30px teal;}
