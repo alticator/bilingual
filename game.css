@@ -7,10 +7,10 @@ html, body {margin: 0;}
 body {background: linear-gradient(to bottom right, #2370d5, #2385ab, blue, magenta, purple); background-size: 400% 400%; animation-name: background-scroll; animation-duration: 30s; animation-iteration-count: infinite;}
 #container {position: absolute; left: 30vw; top: 70vh; width: 40vw; margin: auto; text-align: center;}
 #container div {background-color: rgba(255, 255, 255, 0.6); padding: 5px; margin-top: 10px;}
-nav {background-color: rgba(255, 255, 255, 0.6); color: white; padding: 10px; font-size: 3vh; position: fixed; left: 0; top: 0; bottom: 0; width: 10vw; box-sizing: border-box; height: 80vh; margin: auto; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-top, border-right, border-bottom: 2px solid white; text-align: center;}
+nav {background-color: rgba(255, 255, 255, 0.6); color: white; padding: 10px; font-size: 3vh; position: fixed; left: 0; top: 0; bottom: 0; width: 12vw; box-sizing: border-box; height: 80vh; margin: auto; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-top, border-right, border-bottom: 2px solid white; text-align: center;}
 nav button {color: white; transition: 0.5s; background-color: transparent; font-size: 3vh; border: none;}
 nav button:hover {color: #007f9c;}
-#container button {background-color: #00D0FF; color: white; font-size: 24px; border: none; box-shadow: 0px 0px 50px lightgray;}
+#container button {background-color: #00D0FF; color: white; font-size: 3vh; border: none; box-shadow: 0px 0px 50px lightgray;}
 .data {display: none;}
 input {background-color: rgba(255, 255, 255, 0.6); border: none; width: 20vw; font-size: 24px; text-align: center; outline: none; padding: 8px; font-size: 24px; color: #007f9c;}
 #navContainer {margin-top: 10vh; padding: 10px;}
