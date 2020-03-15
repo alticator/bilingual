@@ -15,10 +15,12 @@ blueGradient.addColorStop(0, "blue");
 blueGradient.addColorStop(1, "aqua");
 
 var gameType = getData("game-type");
+var language = getData("language");
+var englishVocabularies = ["living", "numbers", "animals", "numbersTwo", "sentences"];
 var gameLoop = setInterval(game, 20);
 var questionType = 1;
-var timer = new rect(10, 40, 0, 20, blueGradient);
-var timerText = new textObj("Timer", 15, 60, "20vh Arial", "#00D0FF", "left");
+var timer = new rect(12, 40, 0, 20, blueGradient);
+var timerText = new textObj("Timer", 17, 60, "20vh Arial", "#00D0FF", "left");
 var wordId = random(0, database.pronouns.english.length);
 var wordContainer = new imageObj(60, -10, 30, 5, "wordContainer.png");
 var word = new textObj("Database Error", 50, -10, "3vh Arial", magentaGradientTwo, "center");
@@ -31,17 +33,16 @@ var timePaused = false;
 var livesLeft = 5;
 var animationFontSize = 3;
 var fontSizePlus = 0;
-var livesLeftBoard = new rect(-100, 10, 60, 60, "rgba(0, 208, 255, 0.7)");
+var mainContainer = new imageObj(-100, 10, 60, 60, "container.png");
 var incorrectLabel = new textObj("Lives Left:", -100, 20, "3vh Arial", "white", "center");
 var correctAnswerLabel = new textObj("Database Error", -100, 15, "3vh Arial", "white", "center");
 var incorrectDigitOne = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var incorrectDigitTwo = new textObj("5", -100, 50, "20vh Arial", "white", "center");
 var wordNumber = 0;
 var stage = 0;
-var stageTextContainer = new rect(-100, 10, 60, 60, "rgba(0, 208, 255, 0.7)");
 var stageText = new textObj("Error", -100, 40, "5vh Arial", "white", "center");
 var pauseText = new textObj("Paused", -100, 40, "5vh Arial", "white", "center");
-var containerTitle = new textObj("Message", -100, 15, "3vh Arial", "white", "center")
+var containerTitle = new textObj("Message", -100, 15, "3vh Arial", "white", "center");
 nextStage();
 
 function add(character) {
@@ -57,7 +58,7 @@ function keyPress(event) {
 function pause() {
     timePaused = true;
     word.Yv = 0;
-    stageTextContainer.x = 20;
+    mainContainer.x = 20;
     pauseText.x = 50;
     word.x = -100;
     getId("container").style.visibility = "hidden";
@@ -68,7 +69,7 @@ function pause() {
 function resume() {
     timePaused = false;
     word.Yv = speed;
-    stageTextContainer.x = -100;
+    mainContainer.x = -100;
     pauseText.x = -100;
     word.x = 50;
     getId("container").style.visibility = "visible";
@@ -81,13 +82,13 @@ function nextStage() {
     word.Yv = 0;
     wordNumber = 0;
     stage++;
-    stageTextContainer.x = 20;
+    mainContainer.x = 20;
     containerTitle.x = 50;
     stageText.string = "Stage " + stage;
     stageText.x = 50;
     speed += 0.025;
     setTimeout(function() {
-        stageTextContainer.x = -100;
+        mainContainer.x = -100;
         containerTitle.x = -100;
         stageText.x = -100;
         updateWord();
@@ -138,10 +139,10 @@ function incorrect() {
     livesLeft--;
     document.getElementById("input").value = "";
     timePaused = true;
-    livesLeftBoard.x = 20;
+    mainContainer.x = 20;
     incorrectLabel.x = 50;
     if (questionType == 1) {
-        correctAnswerLabel.string = "Correct Answer: " + eval("database." + gameType + ".french[wordId]");
+        correctAnswerLabel.string = "Correct Answer: " + eval("database." + gameType + "." + language + "[wordId]");
     }
     else if (questionType == 2) {
         correctAnswerLabel.string = "Correct Answer: " + eval("database." + gameType + ".english[wordId]");
@@ -168,7 +169,7 @@ function incorrectThree() {
 }
 
 function incorrectFour() {
-    livesLeftBoard.x = -100;
+    mainContainer.x = -100;
     incorrectLabel.x = -100;
     correctAnswerLabel.x = -100;
     incorrectDigitTwo.x = -100;
@@ -184,7 +185,7 @@ function incorrectFour() {
 
 function checkAnswer() {
     if (questionType == 1) {
-        if (getInput() == eval("database." + gameType + ".french[wordId].toLowerCase()")) {
+        if (getInput() == eval("database." + gameType + "." + language + "[wordId].toLowerCase()")) {
             correct();
         }
         else {
@@ -203,13 +204,17 @@ function checkAnswer() {
 
 function updateWord() {
     questionType = random(1, 3)
+    if (language == "english") {
+        var gameTypeNumber = random(0, englishVocabularies.length);
+        gameType = englishVocabularies[gameTypeNumber];
+    }
     if (questionType == 1) {
         wordId = random(0, eval("database." + gameType + ".english.length"));
         word.string = eval("database." + gameType + ".english[wordId]");
     }
     else if (questionType == 2) {
-        wordId = random(0, eval("database." + gameType + ".french.length"));
-        word.string = eval("database." + gameType + ".french[wordId]");
+        wordId = random(0, eval("database." + gameType + "." + language + ".length"));
+        word.string = eval("database." + gameType + "." + language + "[wordId]");
     }
     wordNumber++;
 }
@@ -217,12 +222,12 @@ function updateWord() {
 function gameOver(message) {
     clearInterval(gameLoop);
     clearObjects();
-    new rect(20, 20, 60, 60, "rgba(0, 208, 255, 0.8)");
+    new imageObj(20, 20, 60, 60, "container.png");
     new textObj("Game Over", 50, 25, "3vh Arial", "white", "center");
     new textObj(message, 50, 50, "5vh Arial", "white", "center");
     var correctAnswer;
     if (questionType == 1) {
-        correctAnswer = eval("database." + gameType + ".french[wordId]");
+        correctAnswer = eval("database." + gameType + "." + language + "[wordId]");
     }
     else if (questionType == 2) {
         correctAnswer = eval("database." + gameType + ".english[wordId]");
@@ -252,7 +257,7 @@ function game() {
         gameOver("Out of Lives");
     }
     if (timePaused == false) {
-        timer.width += 0.03;
+        timer.width += 0.02;
     }
     animationFontSize += fontSizePlus;
     word.font = animationFontSize + "vh Arial";
